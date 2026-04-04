@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dosing Pump — Preview</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a1520;
+    font-family: -apple-system, 'Roboto', sans-serif;
+    color: #E0F4FF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    gap: 48px;
+  }
+
+  h1 { font-size: 22px; color: #00C8E8; letter-spacing: 1px; margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: #7BAFC4; margin-bottom: 32px; }
+
+  .screens-row {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .screen-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .screen-label {
+    font-size: 12px;
+    color: #7BAFC4;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Phone shell */
+  .phone {
+    width: 320px;
+    height: 650px;
+    background: #0D1B2A;
+    border-radius: 40px;
+    border: 2px solid #1e3a50;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px #0a1520;
+  }
+
+  /* Status bar */
+  .status-bar {
+    height: 28px;
+    background: #0D1B2A;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 10px;
+    color: #7BAFC4;
+    flex-shrink: 0;
+  }
+
+  /* App bar */
+  .app-bar {
+    background: #0D1B2A;
+    padding: 8px 16px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    border-bottom: 1px solid #0a1a28;
+  }
+  .app-bar-title { font-size: 18px; font-weight: 700; }
+  .app-bar-sub { font-size: 11px; color: #7BAFC4; margin-top: 1px; }
+
+  /* Badge */
+  .badge {
+    display: flex; align-items: center; gap: 4px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .badge.connected { background: rgba(76,175,140,0.15); border: 1px solid rgba(76,175,140,0.4); color: #4CAF8C; }
+  .badge.demo { background: rgba(255,167,38,0.15); border: 1px solid rgba(255,167,38,0.4); color: #FFA726; }
+  .badge.offline { background: rgba(239,83,80,0.15); border: 1px solid rgba(239,83,80,0.4); color: #EF5350; }
+  .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+  /* Body scroll area */
+  .body {
+    flex: 1;
+    overflow: hidden;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Card */
+  .card {
+    background: #122233;
+    border-radius: 16px;
+    padding: 16px;
+  }
+
+  /* Bottom nav */
+  .bottom-nav {
+    height: 60px;
+    background: #122233;
+    border-top: 1px solid #1e3a50;
+    display: flex;
+    flex-shrink: 0;
+  }
+  .nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    font-size: 10px;
+    color: #7BAFC4;
+    cursor: pointer;
+  }
+  .nav-item.active { color: #00C8E8; }
+  .nav-icon { font-size: 20px; }
+
+  /* ── HOME SCREEN ── */
+
+  .status-card {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  /* Bottle */
+  .bottle-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .bottle {
+    width: 72px;
+    height: 96px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .bottle svg { width: 100%; height: 100%; }
+  .bottle-pct { font-size: 14px; font-weight: 700; }
+  .bottle-lbl { font-size: 9px; color: #7BAFC4; }
+
+  .state-chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .state-chip.idle { background: rgba(123,175,196,0.1); border: 1px solid rgba(123,175,196,0.3); color: #7BAFC4; }
+  .state-chip.running { background: rgba(76,175,140,0.1); border: 1px solid rgba(76,175,140,0.3); color: #4CAF8C; }
+  .chip-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+  .info-row { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 5px; color: #7BAFC4; }
+  .info-row span { color: #E0F4FF; font-weight: 600; }
+
+  .stats-row { display: flex; gap: 10px; }
+  .stat-card {
+    flex: 1; background: #122233; border-radius: 14px; padding: 12px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .stat-icon { font-size: 16px; margin-bottom: 2px; }
+  .stat-val { font-size: 14px; font-weight: 700; }
+  .stat-lbl { font-size: 9px; color: #7BAFC4; }
+
+  .manual-card { }
+  .manual-title { font-size: 14px; font-weight: 700; margin-bottom: 10px; }
+  .volume-display { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+  .volume-val { font-size: 20px; font-weight: 700; color: #00C8E8; }
+  .slider-track {
+    height: 4px; background: #004E6A; border-radius: 2px; position: relative; margin-bottom: 4px;
+  }
+  .slider-fill { height: 100%; background: #00C8E8; border-radius: 2px; width: 40%; }
+  .slider-thumb {
+    width: 16px; height: 16px; background: #00C8E8; border-radius: 50%;
+    position: absolute; top: -6px; left: 38%; border: 2px solid #0D1B2A;
+  }
+  .slider-labels { display: flex; justify-content: space-between; font-size: 9px; color: #7BAFC4; margin-bottom: 10px; }
+  .btn {
+    width: 100%; padding: 10px; border-radius: 12px; border: none;
+    font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .btn-primary { background: #006B8F; color: white; }
+  .btn-danger { background: #EF5350; color: white; }
+
+  /* ── SCHEDULE SCREEN ── */
+  .summary-card { display: flex; }
+  .summary-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .summary-val { font-size: 18px; font-weight: 700; }
+  .summary-lbl { font-size: 9px; color: #7BAFC4; }
+  .summary-divider { width: 1px; background: #1e3a50; margin: 4px 0; }
+  .section-label { font-size: 9px; color: #7BAFC4; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700; margin: 2px 0 6px; }
+
+  .schedule-item {
+    background: #122233; border-radius: 14px; padding: 12px;
+    display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+  }
+  .time-circle {
+    width: 48px; height: 48px; border-radius: 50%;
+    border: 1px solid rgba(0,200,232,0.4);
+    background: rgba(0,107,143,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: #00C8E8; flex-shrink: 0;
+  }
+  .time-circle.disabled { border-color: rgba(123,175,196,0.2); background: #0D1B2A; color: #7BAFC4; }
+  .sched-info { flex: 1; }
+  .sched-name { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+  .sched-meta { font-size: 10px; color: #7BAFC4; display: flex; gap: 8px; }
+  .toggle {
+    width: 34px; height: 20px; border-radius: 10px; position: relative; flex-shrink: 0;
+  }
+  .toggle.on { background: #00C8E8; }
+  .toggle.off { background: #1e3a50; }
+  .toggle-knob {
+    width: 16px; height: 16px; border-radius: 50%; background: white;
+    position: absolute; top: 2px; transition: left 0.2s;
+  }
+  .toggle.on .toggle-knob { left: 16px; }
+  .toggle.off .toggle-knob { left: 2px; }
+
+  .fab {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: #00C8E8; color: #0D1B2A;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; position: absolute; bottom: 72px; right: 16px;
+    box-shadow: 0 4px 16px rgba(0,200,232,0.4);
+  }
+
+  /* ── ADD SCHEDULE SCREEN ── */
+  .form-field {
+    background: #0D1B2A; border: 1px solid #004E6A; border-radius: 12px;
+    padding: 10px 12px; margin-bottom: 10px;
+  }
+  .field-label { font-size: 10px; color: #7BAFC4; margin-bottom: 2px; }
+  .field-value { font-size: 13px; }
+  .field-hint { font-size: 12px; color: #3a6a80; }
+
+  .time-picker-card {
+    background: #122233; border-radius: 14px; padding: 12px 14px;
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;
+  }
+  .time-big { font-size: 22px; font-weight: 700; color: #00C8E8; }
+
+  .days-row { display: flex; gap: 5px; justify-content: space-between; margin: 8px 0 4px; }
+  .day-btn {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700;
+  }
+  .day-btn.sel { background: #00C8E8; color: #0D1B2A; }
+  .day-btn.unsel { background: #122233; border: 1px solid rgba(123,175,196,0.3); color: #7BAFC4; }
+
+  /* ── SETTINGS SCREEN ── */
+  .settings-section { margin-bottom: 14px; }
+  .settings-item {
+    background: #122233;
+    display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+  }
+  .settings-item:first-child { border-radius: 14px 14px 0 0; }
+  .settings-item:last-child { border-radius: 0 0 14px 14px; }
+  .settings-item:only-child { border-radius: 14px; }
+  .settings-item + .settings-item { border-top: 1px solid #1e3a50; }
+  .settings-icon { font-size: 18px; width: 28px; text-align: center; flex-shrink: 0; }
+  .settings-text { flex: 1; }
+  .settings-title { font-size: 13px; font-weight: 600; }
+  .settings-sub { font-size: 10px; color: #7BAFC4; margin-top: 1px; }
+  .settings-right { font-size: 11px; color: #7BAFC4; }
+
+  /* ── CONNECT SCREEN ── */
+  .connect-center {
+    display: flex; flex-direction: column; align-items: center; padding: 20px 0;
+    gap: 8px;
+  }
+  .connect-icon { font-size: 52px; margin-bottom: 4px; }
+  .connect-title { font-size: 16px; font-weight: 700; }
+  .connect-sub { font-size: 11px; color: #7BAFC4; text-align: center; }
+  .hint-box {
+    background: #122233; border: 1px solid #004E6A; border-radius: 12px;
+    padding: 12px; margin-top: 4px; width: 100%;
+  }
+  .hint-title { font-size: 11px; font-weight: 600; margin-bottom: 8px; }
+  .hint-row { display: flex; gap: 8px; align-items: flex-start; margin-top: 5px; }
+  .hint-num {
+    width: 18px; height: 18px; border-radius: 50%; background: rgba(0,107,143,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; flex-shrink: 0;
+  }
+  .hint-text { font-size: 10px; color: #7BAFC4; line-height: 1.4; }
+</style>
+</head>
+<body>
+
+<div style="text-align:center">
+  <h1>Dosing Pump</h1>
+  <div class="subtitle">Flutter Mobile App — UI Preview</div>
+</div>
+
+<div class="screens-row">
+
+  <!-- ══════════════ HOME SCREEN ══════════════ -->
+  <div class="screen-wrap">
+    <div class="screen-label">Головна</div>
+    <div class="phone">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>▌▌▌ WiFi 🔋</span>
+      </div>
+      <div class="app-bar">
+        <div>
+          <div class="app-bar-title">Моя помпа</div>
+          <div class="app-bar-sub">192.168.1.100</div>
+        </div>
+        <div class="badge connected">
+          <div class="badge-dot"></div> Підключено
+        </div>
+      </div>
+      <div class="body">
+
+        <!-- Status card -->
+        <div class="card status-card">
+          <div class="bottle-wrap">
+            <div class="bottle">
+              <svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <clipPath id="bottle-clip">
+                    <path d="M42,0 L42,12 Q12,20,9,30 L7,132 Q7,148,18,148 L102,148 Q113,148,113,132 L110,30 Q108,20,78,12 L78,0 Z"/>
+                  </clipPath>
+                </defs>
+                <!-- Bottle body -->
+                <path d="M42,0 L42,12 Q12,20,9,30 L7,132 Q7,148,18,148 L102,148 Q113,148,113,132 L110,30 Q108,20,78,12 L78,0 Z"
+                      fill="#122233" stroke="rgba(0,200,232,0.4)" stroke-width="2"/>
+                <!-- Liquid fill 72% -->
+                <rect x="7" y="58" width="106" height="90" fill="rgba(0,200,232,0.65)" clip-path="url(#bottle-clip)"/>
+                <!-- Wave on top of liquid -->
+                <path d="M7,58 Q30,52,60,57 Q90,62,113,56 L113,62 Q90,68,60,63 Q30,58,7,64 Z"
+                      fill="rgba(0,200,232,0.4)" clip-path="url(#bottle-clip)"/>
+                <!-- Shine -->
+                <rect x="18" y="58" width="16" height="90" fill="rgba(255,255,255,0.06)" clip-path="url(#bottle-clip)"/>
+                <!-- Tick marks -->
+                <line x1="88" y1="85" x2="104" y2="85" stroke="rgba(123,175,196,0.3)" stroke-width="1"/>
+                <line x1="88" y1="107" x2="104" y2="107" stroke="rgba(123,175,196,0.3)" stroke-width="1"/>
+                <line x1="88" y1="129" x2="104" y2="129" stroke="rgba(123,175,196,0.3)" stroke-width="1"/>
+                <!-- Border -->
+                <path d="M42,0 L42,12 Q12,20,9,30 L7,132 Q7,148,18,148 L102,148 Q113,148,113,132 L110,30 Q108,20,78,12 L78,0 Z"
+                      fill="none" stroke="rgba(0,200,232,0.5)" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="bottle-pct" style="color:#00C8E8">72%</div>
+            <div class="bottle-lbl">Рівень рідини</div>
+          </div>
+          <div style="flex:1">
+            <div class="state-chip idle"><div class="chip-dot"></div>Очікування</div>
+            <div class="info-row">💧 Сьогодні <span>5.4 мл</span></div>
+            <div class="info-row">✅ Доз сьогодні <span>3</span></div>
+            <div class="info-row">📶 Сигнал <span>-62 dBm</span></div>
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-icon">🧪</div>
+            <div class="stat-val">0.42 л</div>
+            <div class="stat-lbl">Всього дозовано</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⏰</div>
+            <div class="stat-val">18:00</div>
+            <div class="stat-lbl">Наступне дозування</div>
+          </div>
+        </div>
+
+        <!-- Manual dose card -->
+        <div class="card manual-card">
+          <div class="manual-title">Ручне дозування</div>
+          <div class="volume-display">
+            💧 <span class="volume-val">2.0 мл</span>
+          </div>
+          <div class="slider-track">
+            <div class="slider-fill"></div>
+            <div class="slider-thumb"></div>
+          </div>
+          <div class="slider-labels"><span>0.1 мл</span><span>50 мл</span></div>
+          <button class="btn btn-primary">▶ Запустити дозування</button>
+        </div>
+
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item active"><div class="nav-icon">🏠</div>Головна</div>
+        <div class="nav-item"><div class="nav-icon">📅</div>Розклад</div>
+        <div class="nav-item"><div class="nav-icon">⚙️</div>Налаштування</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ RUNNING STATE ══════════════ -->
+  <div class="screen-wrap">
+    <div class="screen-label">Дозування активне</div>
+    <div class="phone">
+      <div class="status-bar">
+        <span>9:41</span><span>▌▌▌ WiFi 🔋</span>
+      </div>
+      <div class="app-bar">
+        <div>
+          <div class="app-bar-title">Моя помпа</div>
+          <div class="app-bar-sub">192.168.1.100</div>
+        </div>
+        <div class="badge connected"><div class="badge-dot"></div>Підключено</div>
+      </div>
+      <div class="body">
+        <div class="card status-card">
+          <div class="bottle-wrap">
+            <div class="bottle">
+              <svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg">
+                <defs><clipPath id="bc2">
+                  <path d="M42,0 L42,12 Q12,20,9,30 L7,132 Q7,148,18,148 L102,148 Q113,148,113,132 L110,30 Q108,20,78,12 L78,0 Z"/>
+                </clipPath></defs>
+                <path d="M42,0 L42,12 Q12,20,9,30 L7,132 Q7,148,18,148 L102,148 Q113,148,113,132 L110,30 Q108,20,78,12 L78,0 Z"
+                      fill="#122233" stroke="rgba(0,200,232,0.4)" stroke-width="2"/>
+                <rect x="7" y="72" width="106" height="76" fill="rgba(0,200,232,0.65)" clip-path="url(#bc2)"/>
+                <path d="M7,70 Q30,64,60,70 Q90,76,113,68 L113,75 Q90,82,60,76 Q30,70,7,78 Z"
+                      fill="rgba(0,200,232,0.5)" clip-path="url(#bc2)"/>
+                <rect x="18" y="72" width="16" height="76" fill="rgba(255,255,255,0.06)" clip-path="url(#bc2)"/>
+                <path d="M42,0 L42,12 Q12,20,9,30 L7,132 Q7,148,18,148 L102,148 Q113,148,113,132 L110,30 Q108,20,78,12 L78,0 Z"
+                      fill="none" stroke="rgba(0,200,232,0.5)" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="bottle-pct" style="color:#00C8E8">60%</div>
+            <div class="bottle-lbl">Рівень рідини</div>
+          </div>
+          <div style="flex:1">
+            <div class="state-chip running" style="animation: pulse 1s infinite alternate">
+              <div class="chip-dot" style="animation: pulse 1s infinite alternate"></div>Дозування
+            </div>
+            <div class="info-row">💧 Сьогодні <span>7.4 мл</span></div>
+            <div class="info-row">✅ Доз сьогодні <span>4</span></div>
+            <div class="info-row">📶 Сигнал <span>-62 dBm</span></div>
+          </div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-icon">🧪</div>
+            <div class="stat-val">0.42 л</div>
+            <div class="stat-lbl">Всього дозовано</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⏰</div>
+            <div class="stat-val">20:00</div>
+            <div class="stat-lbl">Наступне дозування</div>
+          </div>
+        </div>
+        <div class="card manual-card">
+          <div class="manual-title">Ручне дозування</div>
+          <div class="volume-display">💧 <span class="volume-val">2.0 мл</span></div>
+          <div class="slider-track">
+            <div class="slider-fill"></div>
+            <div class="slider-thumb"></div>
+          </div>
+          <div class="slider-labels"><span>0.1 мл</span><span>50 мл</span></div>
+          <button class="btn btn-danger">■ Зупинити</button>
+        </div>
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item active"><div class="nav-icon">🏠</div>Головна</div>
+        <div class="nav-item"><div class="nav-icon">📅</div>Розклад</div>
+        <div class="nav-item"><div class="nav-icon">⚙️</div>Налаштування</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ SCHEDULES SCREEN ══════════════ -->
+  <div class="screen-wrap">
+    <div class="screen-label">Розклад</div>
+    <div class="phone" style="position:relative">
+      <div class="status-bar"><span>9:41</span><span>▌▌▌ WiFi 🔋</span></div>
+      <div class="app-bar">
+        <div class="app-bar-title">Розклад</div>
+        <span style="font-size:20px; color:#7BAFC4">↺</span>
+      </div>
+      <div class="body">
+
+        <!-- Summary -->
+        <div class="card summary-card" style="padding:14px">
+          <div class="summary-item">
+            <div class="summary-val" style="color:#4CAF8C">2</div>
+            <div class="summary-lbl">Активних</div>
+          </div>
+          <div class="summary-divider"></div>
+          <div class="summary-item">
+            <div class="summary-val" style="color:#00C8E8">3</div>
+            <div class="summary-lbl">Всього</div>
+          </div>
+          <div class="summary-divider"></div>
+          <div class="summary-item">
+            <div class="summary-val">3.5 мл</div>
+            <div class="summary-lbl">Обʼєм/день</div>
+          </div>
+        </div>
+
+        <div class="section-label">Активні</div>
+
+        <div class="schedule-item">
+          <div class="time-circle">08:00</div>
+          <div class="sched-info">
+            <div class="sched-name">Ранкове дозування</div>
+            <div class="sched-meta"><span>↻ Щодня</span><span>💧 2.0 мл</span></div>
+          </div>
+          <div class="toggle on"><div class="toggle-knob"></div></div>
+        </div>
+
+        <div class="schedule-item">
+          <div class="time-circle">18:00</div>
+          <div class="sched-info">
+            <div class="sched-name">Вечірнє дозування</div>
+            <div class="sched-meta"><span>↻ Щодня</span><span>💧 1.5 мл</span></div>
+          </div>
+          <div class="toggle on"><div class="toggle-knob"></div></div>
+        </div>
+
+        <div class="section-label" style="margin-top:4px">Вимкнені</div>
+
+        <div class="schedule-item" style="opacity:0.5">
+          <div class="time-circle disabled">12:00</div>
+          <div class="sched-info">
+            <div class="sched-name" style="color:#7BAFC4">Тижневе</div>
+            <div class="sched-meta"><span>↻ Сб</span><span>💧 5.0 мл</span></div>
+          </div>
+          <div class="toggle off"><div class="toggle-knob"></div></div>
+        </div>
+
+      </div>
+      <div class="fab">+</div>
+      <div class="bottom-nav">
+        <div class="nav-item"><div class="nav-icon">🏠</div>Головна</div>
+        <div class="nav-item active"><div class="nav-icon">📅</div>Розклад</div>
+        <div class="nav-item"><div class="nav-icon">⚙️</div>Налаштування</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ ADD SCHEDULE ══════════════ -->
+  <div class="screen-wrap">
+    <div class="screen-label">Новий розклад</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>▌▌▌ WiFi 🔋</span></div>
+      <div class="app-bar">
+        <div style="font-size:20px; color:#7BAFC4">←</div>
+        <div class="app-bar-title" style="font-size:16px">Новий розклад</div>
+        <div style="color:#00C8E8; font-size:13px; font-weight:600">Зберегти</div>
+      </div>
+      <div class="body">
+        <!-- Name field -->
+        <div class="form-field">
+          <div class="field-label">Назва</div>
+          <div class="field-value">Ранкове дозування</div>
+        </div>
+
+        <!-- Time picker -->
+        <div class="time-picker-card">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="color:#00C8E8">⏰</span>
+            <span style="font-size:13px;font-weight:600">Час дозування</span>
+          </div>
+          <div class="time-big">08:00</div>
+        </div>
+
+        <!-- Volume -->
+        <div class="card" style="margin-bottom:0">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+            <div style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600">
+              💧 Обʼєм
+            </div>
+            <div style="font-size:18px;font-weight:700;color:#00C8E8">2.0 мл</div>
+          </div>
+          <div class="slider-track">
+            <div class="slider-fill"></div>
+            <div class="slider-thumb"></div>
+          </div>
+          <div class="slider-labels"><span>0.1 мл</span><span>50 мл</span></div>
+        </div>
+
+        <!-- Days -->
+        <div class="card" style="margin-bottom:0">
+          <div style="font-size:13px;font-weight:600">Дні тижня</div>
+          <div style="font-size:9px;color:#7BAFC4;margin-bottom:6px">Порожньо = щодня</div>
+          <div class="days-row">
+            <div class="day-btn sel">Пн</div>
+            <div class="day-btn sel">Вт</div>
+            <div class="day-btn sel">Ср</div>
+            <div class="day-btn sel">Чт</div>
+            <div class="day-btn sel">Пт</div>
+            <div class="day-btn unsel">Сб</div>
+            <div class="day-btn unsel">Нд</div>
+          </div>
+        </div>
+
+        <!-- Repeat -->
+        <div class="card" style="margin-bottom:0">
+          <div style="font-size:13px;font-weight:600;margin-bottom:8px">Повторення</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px">
+            <span>Кожні</span>
+            <div style="flex:1;position:relative">
+              <div class="slider-track">
+                <div class="slider-fill" style="width:10%"></div>
+                <div class="slider-thumb" style="left:8%"></div>
+              </div>
+            </div>
+            <span style="color:#00C8E8;font-weight:700">1 день</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" style="margin-top:4px">+ Додати розклад</button>
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item"><div class="nav-icon">🏠</div>Головна</div>
+        <div class="nav-item active"><div class="nav-icon">📅</div>Розклад</div>
+        <div class="nav-item"><div class="nav-icon">⚙️</div>Налаштування</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ SETTINGS SCREEN ══════════════ -->
+  <div class="screen-wrap">
+    <div class="screen-label">Налаштування</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>▌▌▌ WiFi 🔋</span></div>
+      <div class="app-bar"><div class="app-bar-title">Налаштування</div></div>
+      <div class="body">
+
+        <div class="settings-section">
+          <div class="section-label">Пристрій</div>
+          <div>
+            <div class="settings-item">
+              <div class="settings-icon" style="color:#00C8E8">✏️</div>
+              <div class="settings-text">
+                <div class="settings-title">Назва помпи</div>
+                <div class="settings-sub">Моя помпа</div>
+              </div>
+              <div class="settings-right">›</div>
+            </div>
+            <div class="settings-item">
+              <div class="settings-icon" style="color:#00C8E8">📡</div>
+              <div class="settings-text">
+                <div class="settings-title">IP-адреса</div>
+                <div class="settings-sub">192.168.1.100</div>
+              </div>
+              <div class="settings-right">›</div>
+            </div>
+            <div class="settings-item">
+              <div class="settings-icon" style="color:#00C8E8">ℹ️</div>
+              <div class="settings-text">
+                <div class="settings-title">Версія прошивки</div>
+              </div>
+              <div class="settings-right">1.2.3</div>
+            </div>
+            <div class="settings-item">
+              <div class="settings-icon" style="color:#00C8E8">📶</div>
+              <div class="settings-text">
+                <div class="settings-title">Сила сигналу</div>
+              </div>
+              <div class="settings-right">-62 dBm</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <div class="section-label">Підключення</div>
+          <div>
+            <div class="settings-item">
+              <div class="settings-icon" style="color:#4CAF8C">📶</div>
+              <div class="settings-text">
+                <div class="settings-title">Підключено</div>
+                <div class="settings-sub">192.168.1.100</div>
+              </div>
+              <div style="font-size:11px;color:#EF5350;font-weight:600">Відключити</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <div class="section-label">Помпа</div>
+          <div>
+            <div class="settings-item">
+              <div class="settings-icon" style="color:#00C8E8">💧</div>
+              <div class="settings-text">
+                <div class="settings-title">Скинути рівень рідини</div>
+                <div class="settings-sub">Встановити рівень 100%</div>
+              </div>
+              <div class="settings-right">›</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <div class="section-label">Режим</div>
+          <div>
+            <div class="settings-item">
+              <div class="settings-icon" style="color:#FFA726">🧪</div>
+              <div class="settings-text">
+                <div class="settings-title">Демо-режим</div>
+                <div class="settings-sub">Без реального пристрою</div>
+              </div>
+              <div class="toggle off"><div class="toggle-knob"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align:center;font-size:11px;color:#7BAFC4;margin-top:8px">
+          Dosing Pump v1.0.0
+        </div>
+
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item"><div class="nav-icon">🏠</div>Головна</div>
+        <div class="nav-item"><div class="nav-icon">📅</div>Розклад</div>
+        <div class="nav-item active"><div class="nav-icon">⚙️</div>Налаштування</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ CONNECT SCREEN ══════════════ -->
+  <div class="screen-wrap">
+    <div class="screen-label">Підключення</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>▌▌▌ WiFi 🔋</span></div>
+      <div class="app-bar">
+        <div style="font-size:20px;color:#7BAFC4">←</div>
+        <div class="app-bar-title" style="font-size:16px">Підключення</div>
+        <div></div>
+      </div>
+      <div class="body">
+        <div class="connect-center">
+          <div class="connect-icon">📡</div>
+          <div class="connect-title">Введіть IP-адресу помпи</div>
+          <div class="connect-sub">Переконайтесь, що телефон і помпа<br>у одній WiFi-мережі</div>
+        </div>
+
+        <div class="form-field" style="display:flex;align-items:center;gap:8px">
+          <span style="color:#7BAFC4">📡</span>
+          <div style="flex:1">
+            <div class="field-label">IP-адреса</div>
+            <div class="field-value">192.168.1.100</div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" style="margin-bottom:8px">📡 Підключитися</button>
+        <button class="btn" style="background:transparent;color:#00C8E8;border:1px solid rgba(0,200,232,0.3)">
+          Запустити в демо-режимі
+        </button>
+
+        <div class="hint-box">
+          <div class="hint-title">Як знайти IP-адресу помпи</div>
+          <div class="hint-row">
+            <div class="hint-num">1</div>
+            <div class="hint-text">Підключіться до помпи через Bluetooth при першому налаштуванні</div>
+          </div>
+          <div class="hint-row">
+            <div class="hint-num">2</div>
+            <div class="hint-text">Введіть дані вашої WiFi-мережі</div>
+          </div>
+          <div class="hint-row">
+            <div class="hint-num">3</div>
+            <div class="hint-text">IP-адреса відобразиться на екрані помпи або в роутері</div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item active"><div class="nav-icon">🏠</div>Головна</div>
+        <div class="nav-item"><div class="nav-icon">📅</div>Розклад</div>
+        <div class="nav-item"><div class="nav-icon">⚙️</div>Налаштування</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  @keyframes pulse {
+    from { opacity: 0.5; }
+    to { opacity: 1.0; }
+  }
+</style>
+
+</body>
+</html>
