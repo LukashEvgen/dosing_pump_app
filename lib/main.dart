@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'providers/pump_provider.dart';
+import 'providers/osmosis_provider.dart';
+import 'screens/dashboard_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/schedules_screen.dart';
 import 'screens/settings_screen.dart';
+import 'screens/osmosis_screen.dart';
 import 'theme.dart';
 
 void main() {
@@ -18,8 +21,11 @@ class DosingPumpApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => PumpProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => PumpProvider()),
+        ChangeNotifierProvider(create: (_) => OsmosisProvider()),
+      ],
       child: MaterialApp(
         title: 'Dosing Pump',
         theme: AppTheme.dark,
@@ -40,18 +46,24 @@ class MainShell extends StatefulWidget {
 class _MainShellState extends State<MainShell> {
   int _currentIndex = 0;
 
-  static const _screens = [
-    HomeScreen(),
-    SchedulesScreen(),
-    SettingsScreen(),
-  ];
+  void _navigateTo(int index) {
+    setState(() => _currentIndex = index);
+  }
 
   @override
   Widget build(BuildContext context) {
+    final screens = [
+      DashboardScreen(onNavigate: _navigateTo),
+      const HomeScreen(),
+      const SchedulesScreen(),
+      const OsmosisScreen(),
+      const SettingsScreen(),
+    ];
+
     return Scaffold(
       body: IndexedStack(
         index: _currentIndex,
-        children: _screens,
+        children: screens,
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
@@ -67,14 +79,24 @@ class _MainShellState extends State<MainShell> {
           onTap: (i) => setState(() => _currentIndex = i),
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              activeIcon: Icon(Icons.home),
-              label: 'Головна',
+              icon: Icon(Icons.dashboard_outlined),
+              activeIcon: Icon(Icons.dashboard),
+              label: 'Огляд',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.science_outlined),
+              activeIcon: Icon(Icons.science),
+              label: 'Помпа',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.schedule_outlined),
               activeIcon: Icon(Icons.schedule),
               label: 'Розклад',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.water_drop_outlined),
+              activeIcon: Icon(Icons.water_drop),
+              label: 'Осмос',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings_outlined),

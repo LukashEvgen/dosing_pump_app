@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -312,6 +313,181 @@
   <div class="subtitle">Flutter Mobile App — UI Preview</div>
 </div>
 
+<!-- ══════════════════════════════════════════════════════════ -->
+<!--                    DASHBOARD ROW                          -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div style="text-align:center; margin-bottom:8px;">
+  <h1 style="color:#00C8E8">Дашборд</h1>
+  <div class="subtitle">Головний екран — огляд обох пристроїв</div>
+</div>
+
+<div class="screens-row" style="margin-bottom: 56px;">
+
+  <!-- ══════════════ DASHBOARD — обидва підключені ══════════════ -->
+  <div class="screen-wrap">
+    <div class="screen-label">Огляд — обидва активні</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>▌▌▌ WiFi 🔋</span></div>
+      <div class="app-bar">
+        <div class="app-bar-title">Огляд</div>
+      </div>
+      <div class="body">
+
+        <div style="font-size:9px; color:#7BAFC4; text-transform:uppercase; letter-spacing:1.2px; font-weight:700; margin-bottom:8px;">Пристрої</div>
+
+        <!-- ── Картка помпи ── -->
+        <div class="card" style="margin-bottom:12px;">
+          <!-- Заголовок -->
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+            <div style="width:38px;height:38px;border-radius:10px;background:rgba(0,107,143,0.3);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🧪</div>
+            <div style="flex:1;">
+              <div style="font-size:14px;font-weight:700;">Моя помпа</div>
+              <div style="display:flex;align-items:center;gap:4px;margin-top:2px;">
+                <div style="width:6px;height:6px;border-radius:50%;background:#4CAF8C;"></div>
+                <span style="font-size:10px;color:#7BAFC4;">192.168.1.100</span>
+              </div>
+            </div>
+            <div style="border:1px solid rgba(0,200,232,0.4);border-radius:8px;padding:4px 10px;font-size:11px;color:#00C8E8;font-weight:600;cursor:pointer;">Відкрити</div>
+          </div>
+          <div style="border-top:1px solid #1e3a50; margin-bottom:12px;"></div>
+          <!-- Тіло -->
+          <div style="display:flex; align-items:center; gap:16px;">
+            <!-- Міні-пляшка -->
+            <div style="flex-shrink:0;">
+              <svg width="44" height="60" viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg">
+                <defs><clipPath id="dc1">
+                  <path d="M42,0 L42,12 Q12,20,9,30 L7,132 Q7,148,18,148 L102,148 Q113,148,113,132 L110,30 Q108,20,78,12 L78,0 Z"/>
+                </clipPath></defs>
+                <path d="M42,0 L42,12 Q12,20,9,30 L7,132 Q7,148,18,148 L102,148 Q113,148,113,132 L110,30 Q108,20,78,12 L78,0 Z" fill="#0D1B2A" stroke="rgba(0,200,232,0.4)" stroke-width="3"/>
+                <rect x="7" y="58" width="106" height="90" fill="rgba(0,200,232,0.65)" clip-path="url(#dc1)"/>
+                <path d="M7,58 Q30,52,60,57 Q90,62,113,56 L113,62 Q90,68,60,63 Q30,58,7,64 Z" fill="rgba(0,200,232,0.4)" clip-path="url(#dc1)"/>
+                <path d="M42,0 L42,12 Q12,20,9,30 L7,132 Q7,148,18,148 L102,148 Q113,148,113,132 L110,30 Q108,20,78,12 L78,0 Z" fill="none" stroke="rgba(0,200,232,0.5)" stroke-width="3"/>
+              </svg>
+            </div>
+            <div style="flex:1;">
+              <div style="display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:20px;background:rgba(123,175,196,0.1);border:1px solid rgba(123,175,196,0.3);font-size:10px;color:#7BAFC4;font-weight:600;margin-bottom:6px;">
+                <div style="width:6px;height:6px;border-radius:50%;background:#7BAFC4;"></div> Очікування
+              </div>
+              <div class="info-row" style="font-size:10px;">💧 Сьогодні <span>5.4 мл</span></div>
+              <div class="info-row" style="font-size:10px;">⏰ Наступне <span>18:00</span></div>
+              <div class="info-row" style="font-size:10px;">🔵 Рівень <span>72%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Картка осмосу ── -->
+        <div class="card">
+          <!-- Заголовок -->
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+            <div style="width:38px;height:38px;border-radius:10px;background:rgba(0,107,143,0.3);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">💧</div>
+            <div style="flex:1;">
+              <div style="font-size:14px;font-weight:700;">Осмос контролер</div>
+              <div style="display:flex;align-items:center;gap:4px;margin-top:2px;">
+                <div style="width:6px;height:6px;border-radius:50%;background:#4CAF8C;"></div>
+                <span style="font-size:10px;color:#7BAFC4;">192.168.1.50</span>
+              </div>
+            </div>
+            <div style="border:1px solid rgba(0,200,232,0.4);border-radius:8px;padding:4px 10px;font-size:11px;color:#00C8E8;font-weight:600;cursor:pointer;">Відкрити</div>
+          </div>
+          <div style="border-top:1px solid #1e3a50; margin-bottom:12px;"></div>
+          <!-- Статус реле -->
+          <div style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;background:rgba(76,175,140,0.12);border:1px solid rgba(76,175,140,0.4);font-size:10px;color:#4CAF8C;font-weight:600;margin-bottom:10px;">
+            <div style="width:6px;height:6px;border-radius:50%;background:#4CAF8C;"></div> Активно: 2 реле
+          </div>
+          <!-- Список реле -->
+          <div style="font-size:11px; display:flex; flex-direction:column; gap:4px;">
+            <div style="display:flex;align-items:center;gap:6px;"><div style="width:7px;height:7px;border-radius:50%;background:#4CAF8C;"></div><span style="flex:1;">1. Вхід осмосу</span><span style="color:#4CAF8C;font-weight:700;font-size:10px;">ON</span></div>
+            <div style="display:flex;align-items:center;gap:6px;"><div style="width:7px;height:7px;border-radius:50%;background:#004E6A;border:1px solid rgba(123,175,196,0.3);"></div><span style="flex:1;color:#7BAFC4;">2. Промивка мембрани</span><span style="color:#7BAFC4;font-weight:700;font-size:10px;">OFF</span></div>
+            <div style="display:flex;align-items:center;gap:6px;"><div style="width:7px;height:7px;border-radius:50%;background:#004E6A;border:1px solid rgba(123,175,196,0.3);"></div><span style="flex:1;color:#7BAFC4;">3. Злив хвостів</span><span style="color:#7BAFC4;font-weight:700;font-size:10px;">OFF</span></div>
+            <div style="display:flex;align-items:center;gap:6px;"><div style="width:7px;height:7px;border-radius:50%;background:#4CAF8C;"></div><span style="flex:1;">4. Морський акваріум</span><span style="color:#4CAF8C;font-weight:700;font-size:10px;">ON</span></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item active"><div class="nav-icon">📊</div>Огляд</div>
+        <div class="nav-item"><div class="nav-icon">🧪</div>Помпа</div>
+        <div class="nav-item"><div class="nav-icon">📅</div>Розклад</div>
+        <div class="nav-item"><div class="nav-icon">💧</div>Осмос</div>
+        <div class="nav-item"><div class="nav-icon">⚙️</div>Налаштування</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ DASHBOARD — нічого не підключено ══════════════ -->
+  <div class="screen-wrap">
+    <div class="screen-label">Огляд — відключено</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>▌▌▌ WiFi 🔋</span></div>
+      <div class="app-bar">
+        <div class="app-bar-title">Огляд</div>
+      </div>
+      <div class="body">
+
+        <div style="font-size:9px; color:#7BAFC4; text-transform:uppercase; letter-spacing:1.2px; font-weight:700; margin-bottom:8px;">Пристрої</div>
+
+        <!-- ── Картка помпи — відключена ── -->
+        <div class="card" style="margin-bottom:12px;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+            <div style="width:38px;height:38px;border-radius:10px;background:#004E6A;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;opacity:0.5;">🧪</div>
+            <div style="flex:1;">
+              <div style="font-size:14px;font-weight:700;">Моя помпа</div>
+              <div style="display:flex;align-items:center;gap:4px;margin-top:2px;">
+                <div style="width:6px;height:6px;border-radius:50%;background:#7BAFC4;"></div>
+                <span style="font-size:10px;color:#7BAFC4;">Не підключено</span>
+              </div>
+            </div>
+            <div style="border:1px solid rgba(0,200,232,0.4);border-radius:8px;padding:4px 10px;font-size:11px;color:#00C8E8;font-weight:600;">Відкрити</div>
+          </div>
+          <div style="border-top:1px solid #1e3a50; margin-bottom:12px;"></div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-size:16px;color:#7BAFC4;">📵</span>
+            <span style="font-size:12px;color:#7BAFC4;flex:1;">Помпа не підключена</span>
+            <span style="font-size:11px;color:#00C8E8;">Підключити</span>
+          </div>
+        </div>
+
+        <!-- ── Картка осмосу — відключена ── -->
+        <div class="card">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+            <div style="width:38px;height:38px;border-radius:10px;background:#004E6A;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;opacity:0.5;">💧</div>
+            <div style="flex:1;">
+              <div style="font-size:14px;font-weight:700;">Осмос контролер</div>
+              <div style="display:flex;align-items:center;gap:4px;margin-top:2px;">
+                <div style="width:6px;height:6px;border-radius:50%;background:#7BAFC4;"></div>
+                <span style="font-size:10px;color:#7BAFC4;">Не підключено</span>
+              </div>
+            </div>
+            <div style="border:1px solid rgba(0,200,232,0.4);border-radius:8px;padding:4px 10px;font-size:11px;color:#00C8E8;font-weight:600;">Відкрити</div>
+          </div>
+          <div style="border-top:1px solid #1e3a50; margin-bottom:12px;"></div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-size:16px;color:#7BAFC4;">📵</span>
+            <span style="font-size:12px;color:#7BAFC4;flex:1;">Осмос не підключено</span>
+            <span style="font-size:11px;color:#00C8E8;">Підключити</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item active"><div class="nav-icon">📊</div>Огляд</div>
+        <div class="nav-item"><div class="nav-icon">🧪</div>Помпа</div>
+        <div class="nav-item"><div class="nav-icon">📅</div>Розклад</div>
+        <div class="nav-item"><div class="nav-icon">💧</div>Осмос</div>
+        <div class="nav-item"><div class="nav-icon">⚙️</div>Налаштування</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!--                  EXISTING SCREENS ROW                     -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div style="text-align:center; margin-bottom:8px;">
+  <h1 style="color:#7BAFC4; font-size:16px;">Решта екранів</h1>
+</div>
+
 <div class="screens-row">
 
   <!-- ══════════════ HOME SCREEN ══════════════ -->
@@ -403,8 +579,10 @@
 
       </div>
       <div class="bottom-nav">
-        <div class="nav-item active"><div class="nav-icon">🏠</div>Головна</div>
+        <div class="nav-item"><div class="nav-icon">📊</div>Огляд</div>
+        <div class="nav-item active"><div class="nav-icon">🧪</div>Помпа</div>
         <div class="nav-item"><div class="nav-icon">📅</div>Розклад</div>
+        <div class="nav-item"><div class="nav-icon">💧</div>Осмос</div>
         <div class="nav-item"><div class="nav-icon">⚙️</div>Налаштування</div>
       </div>
     </div>
@@ -478,8 +656,10 @@
         </div>
       </div>
       <div class="bottom-nav">
-        <div class="nav-item active"><div class="nav-icon">🏠</div>Головна</div>
+        <div class="nav-item"><div class="nav-icon">📊</div>Огляд</div>
+        <div class="nav-item active"><div class="nav-icon">🧪</div>Помпа</div>
         <div class="nav-item"><div class="nav-icon">📅</div>Розклад</div>
+        <div class="nav-item"><div class="nav-icon">💧</div>Осмос</div>
         <div class="nav-item"><div class="nav-icon">⚙️</div>Налаштування</div>
       </div>
     </div>
@@ -548,8 +728,10 @@
       </div>
       <div class="fab">+</div>
       <div class="bottom-nav">
-        <div class="nav-item"><div class="nav-icon">🏠</div>Головна</div>
+        <div class="nav-item"><div class="nav-icon">📊</div>Огляд</div>
+        <div class="nav-item"><div class="nav-icon">🧪</div>Помпа</div>
         <div class="nav-item active"><div class="nav-icon">📅</div>Розклад</div>
+        <div class="nav-item"><div class="nav-icon">💧</div>Осмос</div>
         <div class="nav-item"><div class="nav-icon">⚙️</div>Налаштування</div>
       </div>
     </div>
@@ -629,8 +811,10 @@
         <button class="btn btn-primary" style="margin-top:4px">+ Додати розклад</button>
       </div>
       <div class="bottom-nav">
-        <div class="nav-item"><div class="nav-icon">🏠</div>Головна</div>
+        <div class="nav-item"><div class="nav-icon">📊</div>Огляд</div>
+        <div class="nav-item"><div class="nav-icon">🧪</div>Помпа</div>
         <div class="nav-item active"><div class="nav-icon">📅</div>Розклад</div>
+        <div class="nav-item"><div class="nav-icon">💧</div>Осмос</div>
         <div class="nav-item"><div class="nav-icon">⚙️</div>Налаштування</div>
       </div>
     </div>
@@ -728,8 +912,10 @@
 
       </div>
       <div class="bottom-nav">
-        <div class="nav-item"><div class="nav-icon">🏠</div>Головна</div>
+        <div class="nav-item"><div class="nav-icon">📊</div>Огляд</div>
+        <div class="nav-item"><div class="nav-icon">🧪</div>Помпа</div>
         <div class="nav-item"><div class="nav-icon">📅</div>Розклад</div>
+        <div class="nav-item"><div class="nav-icon">💧</div>Осмос</div>
         <div class="nav-item active"><div class="nav-icon">⚙️</div>Налаштування</div>
       </div>
     </div>
@@ -782,8 +968,254 @@
         </div>
       </div>
       <div class="bottom-nav">
-        <div class="nav-item active"><div class="nav-icon">🏠</div>Головна</div>
+        <div class="nav-item"><div class="nav-icon">📊</div>Огляд</div>
+        <div class="nav-item active"><div class="nav-icon">🧪</div>Помпа</div>
         <div class="nav-item"><div class="nav-icon">📅</div>Розклад</div>
+        <div class="nav-item"><div class="nav-icon">💧</div>Осмос</div>
+        <div class="nav-item"><div class="nav-icon">⚙️</div>Налаштування</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════ OSMOSIS ROW ══════════════ -->
+<div style="text-align:center; margin-top: 16px;">
+  <h1 style="color:#4CAF8C">Осмос Менеджер</h1>
+  <div class="subtitle">Нова вкладка — управління ESP32 осмос-контролером</div>
+</div>
+
+<div class="screens-row">
+
+  <!-- ══════════════ OSMOSIS — ПІДКЛЮЧЕННЯ ══════════════ -->
+  <div class="screen-wrap">
+    <div class="screen-label">Осмос — підключення</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>▌▌▌ WiFi 🔋</span></div>
+      <div class="app-bar">
+        <div class="app-bar-title">Осмос</div>
+      </div>
+      <div class="body" style="justify-content:center; padding-top: 20px;">
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px; padding:0 8px;">
+          <div style="font-size:52px; margin-bottom:4px">💧</div>
+          <div style="font-size:17px; font-weight:700">Осмос контролер</div>
+          <div style="font-size:12px; color:#7BAFC4; text-align:center">Введіть IP-адресу ESP32</div>
+
+          <div style="height:16px"></div>
+
+          <div class="form-field" style="width:100%; display:flex; align-items:center; gap:8px;">
+            <span style="color:#7BAFC4">📡</span>
+            <div style="flex:1">
+              <div class="field-label">IP-адреса</div>
+              <div class="field-hint">192.168.1.50</div>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" style="width:100%; margin-top:4px">
+            📡 Підключитися
+          </button>
+        </div>
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item"><div class="nav-icon">📊</div>Огляд</div>
+        <div class="nav-item"><div class="nav-icon">🧪</div>Помпа</div>
+        <div class="nav-item"><div class="nav-icon">📅</div>Розклад</div>
+        <div class="nav-item active"><div class="nav-icon">💧</div>Осмос</div>
+        <div class="nav-item"><div class="nav-icon">⚙️</div>Налаштування</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ OSMOSIS — ГОЛОВНИЙ ЕКРАН ══════════════ -->
+  <div class="screen-wrap">
+    <div class="screen-label">Осмос — управління</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>▌▌▌ WiFi 🔋</span></div>
+      <div class="app-bar">
+        <div class="app-bar-title">Осмос</div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:18px; color:#7BAFC4">↺</span>
+          <span style="font-size:18px; color:#7BAFC4">⋮</span>
+        </div>
+      </div>
+      <div class="body">
+
+        <!-- IP row -->
+        <div style="display:flex; align-items:center; gap:6px; font-size:11px; color:#7BAFC4; margin-bottom:2px;">
+          <span>📡</span>
+          <span>192.168.1.50</span>
+          <span style="flex:1"></span>
+          <span style="color:#4CAF8C; font-size:9px">●</span>
+          <span style="color:#4CAF8C; font-size:11px">Підключено</span>
+        </div>
+
+        <!-- Relay 1: ON -->
+        <div class="card" style="display:flex; align-items:center; gap:14px; padding:14px 16px;">
+          <div style="width:40px; height:40px; border-radius:50%; background:rgba(76,175,140,0.15); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;">💦</div>
+          <div style="flex:1;">
+            <div style="font-size:10px; color:#7BAFC4;">Реле 1</div>
+            <div style="font-size:13px; font-weight:600;">Вхід осмосу</div>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:flex-end; gap:2px;">
+            <div style="font-size:11px; color:#4CAF8C; font-weight:500;">Увімкнено</div>
+            <div class="toggle on" style="background:#4CAF8C;"><div class="toggle-knob"></div></div>
+          </div>
+        </div>
+
+        <!-- Relay 2: OFF -->
+        <div class="card" style="display:flex; align-items:center; gap:14px; padding:14px 16px;">
+          <div style="width:40px; height:40px; border-radius:50%; background:#004E6A; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; opacity:0.6;">🧹</div>
+          <div style="flex:1;">
+            <div style="font-size:10px; color:#7BAFC4;">Реле 2</div>
+            <div style="font-size:13px; font-weight:600;">Промивка мембрани</div>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:flex-end; gap:2px;">
+            <div style="font-size:11px; color:#7BAFC4; font-weight:500;">Вимкнено</div>
+            <div class="toggle off"><div class="toggle-knob"></div></div>
+          </div>
+        </div>
+
+        <!-- Relay 3: OFF -->
+        <div class="card" style="display:flex; align-items:center; gap:14px; padding:14px 16px;">
+          <div style="width:40px; height:40px; border-radius:50%; background:#004E6A; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; opacity:0.6;">🚰</div>
+          <div style="flex:1;">
+            <div style="font-size:10px; color:#7BAFC4;">Реле 3</div>
+            <div style="font-size:13px; font-weight:600;">Злив хвостів</div>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:flex-end; gap:2px;">
+            <div style="font-size:11px; color:#7BAFC4; font-weight:500;">Вимкнено</div>
+            <div class="toggle off"><div class="toggle-knob"></div></div>
+          </div>
+        </div>
+
+        <!-- Relay 4: ON -->
+        <div class="card" style="display:flex; align-items:center; gap:14px; padding:14px 16px;">
+          <div style="width:40px; height:40px; border-radius:50%; background:rgba(76,175,140,0.15); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;">🌊</div>
+          <div style="flex:1;">
+            <div style="font-size:10px; color:#7BAFC4;">Реле 4</div>
+            <div style="font-size:13px; font-weight:600;">Морський акваріум</div>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:flex-end; gap:2px;">
+            <div style="font-size:11px; color:#4CAF8C; font-weight:500;">Увімкнено</div>
+            <div class="toggle on" style="background:#4CAF8C;"><div class="toggle-knob"></div></div>
+          </div>
+        </div>
+
+        <!-- Кнопки -->
+        <button class="btn" style="border: 1px solid rgba(239,83,80,0.5); color:#EF5350; background:transparent; margin-top:2px;">
+          ⏻ Вимкнути всі реле
+        </button>
+        <button class="btn btn-primary" style="margin-top:6px;">
+          ⏰ Розклад реле
+        </button>
+
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item"><div class="nav-icon">📊</div>Огляд</div>
+        <div class="nav-item"><div class="nav-icon">🧪</div>Помпа</div>
+        <div class="nav-item"><div class="nav-icon">📅</div>Розклад</div>
+        <div class="nav-item active"><div class="nav-icon">💧</div>Осмос</div>
+        <div class="nav-item"><div class="nav-icon">⚙️</div>Налаштування</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ OSMOSIS — РОЗКЛАД ══════════════ -->
+  <div class="screen-wrap">
+    <div class="screen-label">Осмос — розклад</div>
+    <div class="phone">
+      <div class="status-bar"><span>9:41</span><span>▌▌▌ WiFi 🔋</span></div>
+      <div class="app-bar">
+        <div style="font-size:18px; color:#7BAFC4;">←</div>
+        <div class="app-bar-title" style="font-size:16px;">Розклад осмосу</div>
+        <div style="display:flex; gap:8px;">
+          <span style="font-size:18px; color:#7BAFC4;">🗑</span>
+          <span style="font-size:18px; color:#7BAFC4;">💾</span>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div style="display:flex; background:#0D1B2A; border-bottom: 1px solid #1e3a50; flex-shrink:0;">
+        <div style="flex:1; text-align:center; padding:10px 0; font-size:11px; color:#00C8E8; border-bottom:2px solid #00C8E8; font-weight:600;">Реле 1</div>
+        <div style="flex:1; text-align:center; padding:10px 0; font-size:11px; color:#7BAFC4;">Реле 2</div>
+        <div style="flex:1; text-align:center; padding:10px 0; font-size:11px; color:#7BAFC4;">Реле 3</div>
+        <div style="flex:1; text-align:center; padding:10px 0; font-size:11px; color:#7BAFC4;">Реле 4</div>
+      </div>
+
+      <div class="body">
+        <!-- Relay label -->
+        <div style="font-size:13px; font-weight:700; color:#00C8E8; margin-bottom:6px;">Вхід осмосу</div>
+
+        <!-- Timer 1 — enabled -->
+        <div class="card" style="margin-bottom:10px;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+            <div style="width:28px; height:28px; border-radius:50%; background:rgba(0,200,232,0.15); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:#00C8E8; flex-shrink:0;">1</div>
+            <div style="font-size:13px; font-weight:600; flex:1;">Таймер 1</div>
+            <div class="toggle on"><div class="toggle-knob"></div></div>
+          </div>
+          <!-- Divider -->
+          <div style="border-top: 1px solid #1e3a50; margin-bottom:10px;"></div>
+          <!-- Auto mode -->
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+            <span style="font-size:13px;">⚙️</span>
+            <span style="font-size:12px; flex:1;">Авто режим</span>
+            <div class="toggle on" style="background:#4CAF8C;"><div class="toggle-knob"></div></div>
+          </div>
+          <!-- Time -->
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+            <span style="font-size:13px;">🕐</span>
+            <span style="font-size:12px;">Час:</span>
+            <div style="background:#0D1B2A; border:1px solid #004E6A; border-radius:10px; padding:6px 10px; font-size:14px; font-weight:700; color:#00C8E8; min-width:42px; text-align:center;">08</div>
+            <span style="font-size:16px; font-weight:700;">:</span>
+            <div style="background:#0D1B2A; border:1px solid #004E6A; border-radius:10px; padding:6px 10px; font-size:14px; font-weight:700; color:#00C8E8; min-width:42px; text-align:center;">00</div>
+          </div>
+          <!-- Day -->
+          <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px; flex-wrap:wrap;">
+            <span style="font-size:13px;">📅</span>
+            <span style="font-size:12px;">День:</span>
+            <div style="display:flex; gap:3px;">
+              <div style="width:28px;height:28px;border-radius:7px;background:#004E6A;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#7BAFC4;">Нд</div>
+              <div style="width:28px;height:28px;border-radius:7px;background:#00C8E8;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#0D1B2A;">Пн</div>
+              <div style="width:28px;height:28px;border-radius:7px;background:#004E6A;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#7BAFC4;">Вт</div>
+              <div style="width:28px;height:28px;border-radius:7px;background:#004E6A;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#7BAFC4;">Ср</div>
+              <div style="width:28px;height:28px;border-radius:7px;background:#004E6A;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#7BAFC4;">Чт</div>
+              <div style="width:28px;height:28px;border-radius:7px;background:#004E6A;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#7BAFC4;">Пт</div>
+              <div style="width:28px;height:28px;border-radius:7px;background:#004E6A;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#7BAFC4;">Сб</div>
+            </div>
+          </div>
+          <!-- Duration -->
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:13px;">⏱</span>
+            <span style="font-size:12px;">Тривалість:</span>
+            <div style="background:#0D1B2A; border:1px solid #004E6A; border-radius:10px; padding:6px 12px; font-size:14px; font-weight:700; color:#00C8E8; min-width:50px; text-align:center;">30</div>
+            <span style="font-size:11px; color:#7BAFC4;">хвилин</span>
+          </div>
+        </div>
+
+        <!-- Timer 2 — disabled (collapsed) -->
+        <div class="card" style="margin-bottom:10px; opacity:0.6;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:28px; height:28px; border-radius:50%; background:#004E6A; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:#7BAFC4; flex-shrink:0;">2</div>
+            <div style="font-size:13px; font-weight:600; flex:1; color:#7BAFC4;">Таймер 2</div>
+            <div class="toggle off"><div class="toggle-knob"></div></div>
+          </div>
+        </div>
+
+        <!-- Timer 3 — disabled (collapsed) -->
+        <div class="card" style="opacity:0.6;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:28px; height:28px; border-radius:50%; background:#004E6A; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:#7BAFC4; flex-shrink:0;">3</div>
+            <div style="font-size:13px; font-weight:600; flex:1; color:#7BAFC4;">Таймер 3</div>
+            <div class="toggle off"><div class="toggle-knob"></div></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item"><div class="nav-icon">📊</div>Огляд</div>
+        <div class="nav-item"><div class="nav-icon">🧪</div>Помпа</div>
+        <div class="nav-item"><div class="nav-icon">📅</div>Розклад</div>
+        <div class="nav-item active"><div class="nav-icon">💧</div>Осмос</div>
         <div class="nav-item"><div class="nav-icon">⚙️</div>Налаштування</div>
       </div>
     </div>
