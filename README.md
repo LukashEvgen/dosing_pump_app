@@ -1,17 +1,178 @@
-# dosing_pump_app
+# Dosing Pump App 🐠
 
-A new Flutter project.
+Flutter додаток для керування розумною перистальтичною помпою дозування рідини для морських акваріумів.
 
-## Getting Started
+## Огляд
 
-This project is a starting point for a Flutter application.
+Додаток надає зручний мобільний інтерфейс для:
+- Керування дозуванням рідини (добрив, мінералів, тощо)
+- Моніторингу рівня рідини та статистики
+- Налаштування розкладів автоматичного дозування
+- Калібрування помпи
+- Перегляду інформації про пристрій
 
-A few resources to get you started if this is your first Flutter project:
+## Функціонал
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+- ✅ **Ручне дозування** — запуск дози будь-якого об'єму
+- ✅ **Автоматичні розклади** — налаштування повторюваних доз за розкладом
+- ✅ **Моніторинг рідини** — відстеження витрат за день/весь час
+- ✅ **Калібрування** — точне налаштування мл/оберт
+- ✅ **Статистика** — історія доз, uptime, температура
+- ✅ **Реальний час** — live оновлення статусу помпи
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Технічний стек
+
+- **Framework**: Flutter 3.x
+- **Мова**: Dart
+- **API**: REST API v2 (JSON)
+- **Підключення**: WiFi (локальна мережа)
+- **Firmware**: [PD Stepper Firmware](https://github.com/LukashEvgen/pdstepperfirmware)
+
+## Вимоги
+
+- Flutter SDK 3.0+
+- Dart 3.0+
+- Android Studio / Xcode (для розробки)
+- Пристрій PD Stepper з прошивкою v1.1+
+
+## Встановлення
+
+### 1. Клонування репозиторію
+
+```bash
+git clone https://github.com/LukashEvgen/dosing_pump_app.git
+cd dosing_pump_app
+```
+
+### 2. Встановлення залежностей
+
+```bash
+flutter pub get
+```
+
+### 3. Запуск додатку
+
+```bash
+# Для Android
+flutter run
+
+# Для iOS
+flutter run -d ios
+
+# Для Web
+flutter run -d chrome
+```
+
+## Налаштування підключення
+
+1. Переконайтесь, що ваш пристрій PD Stepper підключений до WiFi
+2. Знайдіть IP-адресу пристрою на OLED-екрані
+3. У додатку введіть IP-адресу для підключення
+4. Додаток автоматично підключиться до REST API
+
+## API Інтеграція
+
+Додаток використовує REST API v2, що надається прошивкою PD Stepper:
+
+### Основні ендпоінти
+
+- `GET /api/status` — отримання статусу пристрою
+- `POST /api/dose/start` — запуск дози
+- `POST /api/dose/stop` — зупинка помпи
+- `POST /api/calibrate/start` — режим калібрування
+- `POST /api/calibrate/set` — збереження калібрування
+- `GET /api/schedules` — список розкладів
+- `POST /api/schedules` — створення розкладу
+- `PUT /api/schedules/{id}` — оновлення розкладу
+- `DELETE /api/schedules/{id}` — видалення розкладу
+
+Детальна документація API: [PD Stepper Firmware README](https://github.com/LukashEvgen/pdstepperfirmware#rest-api-v2-flutter-додаток-dosing_pump_app)
+
+## Структура проекту
+
+```
+lib/
+├── main.dart           # Точка входу
+├── models/             # Моделі даних
+├── services/           # API сервіси
+├── screens/            # Екрани UI
+├── widgets/            # Переиспользуемые компоненти
+└── utils/              # Утиліти та хелпери
+```
+
+## Розробка
+
+### Запуск тестів
+
+```bash
+flutter test
+```
+
+### Білд для продакшн
+
+```bash
+# Android APK
+flutter build apk --release
+
+# iOS
+flutter build ios --release
+
+# Web
+flutter build web --release
+```
+
+## Розклади дозування
+
+Додаток підтримує налаштування повторюваних розкладів:
+
+```json
+{
+  "id": "schedule-1",
+  "time": "18:00",
+  "volume_ml": 2.0,
+  "days": [1, 3, 5],
+  "enabled": true
+}
+```
+
+## Калібрування помпи
+
+1. Відкрийте екран "Калібрування"
+2. Натисніть "Почати калібрування"
+3. Виміряйте фактичний об'єм видачі
+4. Введіть фактичний об'єм у додатку
+5. Натисніть "Зберегти" — коефіцієнт мл/оберт автоматично скоригується
+
+## Troubleshooting
+
+**Не можу підключитися до пристрою**
+- Переконайтесь, що телефон та пристрій у одній WiFi мережі
+- Перевірте IP-адресу на OLED-екрані пристрою
+- Спробуйте перезавантажити пристрій
+
+**Дози неточні**
+- Виконайте калібрування помпи через додаток
+- Перевірте, що трубка помпи встановлена правильно
+
+**Додаток вилітає**
+- Оновіть прошивку пристрою до останньої версії
+- Перевірте логи: `flutter logs`
+
+## Контрибуція
+
+Вітаються pull requests! Для великих змін спочатку відкрийте issue для обговорення.
+
+Дивіться [CONTRIBUTING.md](CONTRIBUTING.md) для деталей.
+
+## Ліцензія
+
+MIT License - дивіться [LICENSE](LICENSE) файл
+
+## Зв'язок
+
+- Issues: [GitHub Issues](https://github.com/LukashEvgen/dosing_pump_app/issues)
+- Firmware репозиторій: [pdstepperfirmware](https://github.com/LukashEvgen/pdstepperfirmware)
+
+---
+
+Зроблено з ❤️ для акваріумістів
